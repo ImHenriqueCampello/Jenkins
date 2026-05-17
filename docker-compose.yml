@@ -26,7 +26,7 @@ services:
     working_dir: /app
 
     volumes:
-      - .:/app
+      - /var/jenkins_home/workspace/PipelineCalculadora:/app
 
     command: mvn test
 
