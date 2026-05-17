@@ -6,8 +6,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.calculadora</groupId>
-    <artifactId>AV2</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>calculadora</artifactId>
+    <version>1.0</version>
 
     <dependencies>
 
@@ -24,6 +24,7 @@
     <build>
         <plugins>
 
+            <!-- Plugin de testes -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

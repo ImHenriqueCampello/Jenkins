@@ -1,0 +1,74 @@
+services:
+
+  docker:
+    image: docker:dind
+
+    container_name: docker-dind
+
+    privileged: true
+
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+
+    networks:
+      - devops
+
+  jenkins:
+
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
+
+    container_name: jenkins
+
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+
+    environment:
+      DOCKER_HOST: tcp://docker:2375
+
+    depends_on:
+      - docker
+
+    networks:
+      - devops
+
+    volumes:
+      - dados_jenkins:/var/jenkins_home
+
+  container-test:
+    image: maven:3.9-eclipse-temurin-21
+
+    container_name: container-test
+
+    working_dir: /app
+
+    volumes:
+      - .:/app
+
+    command: mvn test
+
+    networks:
+      - devops
+
+  container-build:
+    image: maven:3.9-eclipse-temurin-21
+
+    container_name: container-build
+
+    working_dir: /app
+
+    volumes:
+      - .:/app
+
+    command: mvn clean package
+
+    networks:
+      - devops
+
+networks:
+  devops:
+
+volumes:
+  dados_jenkins:
