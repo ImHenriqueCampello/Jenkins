@@ -9,26 +9,34 @@ pipeline {
             }
         }
 
-        stage('Debug') {
-            steps {
-                sh '''
-                    ls
-                    pwd
-                    find /var/jenkins_home/workspace/Calculadora -name pom.xml
-                '''
-            }
-        }
-
         stage('Testes') {
             steps {
                 sh '''
                     docker run --rm \
-                    -v /var/jenkins_home/workspace/Calculadora:/app \
+                    -v /workspace:/app \
                     -w /app \
                     maven:3.9-eclipse-temurin-21 \
                     mvn test
                 '''
             }
+        }
+
+        stage('Build') {
+            steps {
+                sh '''
+                    docker build -t calculadora .
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executada com sucesso!'
+        }
+
+        failure {
+            echo 'Pipeline falhou!'
         }
     }
 }
