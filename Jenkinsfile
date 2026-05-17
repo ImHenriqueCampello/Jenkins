@@ -12,13 +12,13 @@ pipeline {
 
         stage('Testes') {
             steps {
-                sh 'docker compose run --rm container-test'
+                sh 'docker-compose run --rm container-test'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'docker compose run --rm container-build'
+                sh 'docker-compose run --rm container-build'
             }
         }
     }
