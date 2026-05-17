@@ -11,13 +11,21 @@ pipeline {
 
         stage('Testes') {
             steps {
-                sh 'mvn test'
+                sh '''
+                    docker run --rm \
+                    -v "$PWD":/app \
+                    -w /app \
+                    maven:3.9-eclipse-temurin-21 \
+                    mvn test
+                '''
             }
         }
 
         stage('Build') {
             steps {
-                sh 'docker build -t calculadora .'
+                sh '''
+                    docker build -t calculadora .
+                '''
             }
         }
     }
