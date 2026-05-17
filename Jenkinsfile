@@ -1,3 +1,5 @@
+// Jenkinsfile
+
 pipeline {
     agent any
 
@@ -13,7 +15,7 @@ pipeline {
             steps {
                 sh '''
                     docker run --rm \
-                    -v "$PWD":/app \
+                    -v /workspace:/app \
                     -w /app \
                     maven:3.9-eclipse-temurin-21 \
                     mvn test
