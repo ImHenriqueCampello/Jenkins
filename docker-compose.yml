@@ -14,15 +14,12 @@ services:
       - "50000:50000"
 
     volumes:
-      - dados_jenkins:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
       - ./jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - .:/workspace
 
     networks:
       - devops
 
 networks:
   devops:
-
-volumes:
-  dados_jenkins:
