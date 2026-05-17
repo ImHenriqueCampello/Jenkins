@@ -1,0 +1,26 @@
+-----------------------------------------------
+GitHub
+   ↓
+Jenkins
+   ├── Container-Test
+   ├── Container-Build
+   └── Container-Email
+            ↓
+         Gmail SMTP
+            ↓
+       Email real
+
+Nginx
+   ↓
+Expõe os serviços
+-----------------------------------------------
+
+
+-----------------------------------------------
+Com nginx
+Você acessa tudo por um único ponto:
+localhost/jenkins
+localhost/tests
+localhost/build
+localhost/email
+-----------------------------------------------
